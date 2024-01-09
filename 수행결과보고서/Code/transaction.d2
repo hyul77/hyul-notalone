@@ -1,0 +1,22 @@
+transactional: {
+  
+    shape: sequence_diagram
+  
+    c: Client
+    con: Controller
+    ser: Service
+    redirect: {
+      주문하기: {
+        c -> con -> ser
+        ser -> c
+      }
+      c -> c
+  
+      구매내역 확인: {
+        c -> con
+        con -> ser
+        ser -> c
+      }
+    }
+  }
+  

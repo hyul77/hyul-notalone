@@ -1,0 +1,154 @@
+<html layout:decorate="~{layout}">
+  <div layout:fragment="content">
+    <header
+      class="site-header section-padding d-flex justify-content-center align-items-center"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-12 mb-3">
+            <h1>
+              <span class="d-block text-primary">Choose your</span>
+              <span class="d-block text-dark">favorite stuffs</span>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section class="products section-padding">
+      <div class="container">
+        <h3>
+          <span class="d-block text-dark">장바구니 목록</span>
+        </h3>
+        <div class="row">
+          <form  
+            method="post"
+            th:action="@{/mypage/insertPurchase}"
+          >
+            <table width="100%">
+              <tr>
+                <td align="right">
+                  <button
+                    type="submit"
+                    class="btn btn-success"
+                  >
+                  주문하기
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+        <div class="table-responsive" style="padding-top: 50px">
+          <table class="table table-hover">
+            <thead>
+              <tr style="text-align: center;">
+                <th scope="col">No.</th>
+                <th scope="col">상품</th>
+                <th scope="col">수량</th>
+                <th scope="col">가격</th>
+                <th scope="col">비고</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="text-align: center;" th:each="cartItem : ${cartItemList}">
+                <td scope="row" th:text="${cartItem.cartItemId}"></td>
+                <td scope="row" th:text="${cartItem.product.productId}" ></td>
+                <td scope="row" th:text="${cartItem.cartItemCount}" ></td>
+                <td scope="row" th:text="${cartItem.product.productPrice}" ></td>
+                <td>
+                  <!-- <a th:href="@{/cart/update(cartItemId=${cartItem.cartItemId})}" class="btn btn-primary">수정</a>
+                  <a th:href="@{/cart/delete(cartItemId=${cartItem.cartItemId})}" class="btn btn-danger">삭제</a> -->
+                  <a class="btn btn-primary">수정</a>
+                  <a class="btn btn-danger">삭제</a>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr style="text-align: center;">
+                <th></th>
+                <th></th>
+                <th>총액</th>
+                <th th:text="|${totalPrice} 원|"></th>
+                <th></th>
+              </tr>
+            </tfoot>
+          </table>
+          <a href="/" class="btn btn-secondary"> &laquo; 쇼핑 계속하기</a>
+        </div>
+      </div>
+    </section>
+    <!-- 수정 모달 -->
+    <div 
+      class="modal fade"
+      th:id="'modalUpdate'"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+      >
+        <!-- 모달 내용 -->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header flex-column">
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <!-- 수정 모달 내용 -->
+                <h5 
+                  class="modal-title"
+                  style="text-align: center;"
+                  >수정하시겠습니까?</h5>
+                <div class="row w-50">
+                  <form th:action="@{/cart/update}" method="post">
+                    <button type="submit" id="updateCart" class="btn custom-btn cart-btn ms-lg-4">Yes</button>
+                    <button type="submit" class="btn custom-btn cart-btn ms-lg-4">No</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 삭제 모달 -->
+    <div 
+      class="modal fade" 
+      th:id="'modalDelete'" 
+      tabindex="-1" 
+      role="dialog" 
+      aria-labelledby="exampleModalLabel" 
+      aria-hidden="true"
+      >
+        <!-- 모달 내용 -->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header flex-column">
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <!-- 삭제 모달 내용 -->
+                <h5 
+                  class="modal-title"
+                  style="text-align: center;"
+                  >삭제하시겠습니까?</h5>
+                <div class="row w-50">
+                  <form th:action="@{/cart/delete}" method="post">
+                    <button type="submit" id="deleteCart" class="btn custom-btn cart-btn ms-lg-4">Yes</button>
+                    <button type="submit" class="btn custom-btn cart-btn ms-lg-4">No</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</html>

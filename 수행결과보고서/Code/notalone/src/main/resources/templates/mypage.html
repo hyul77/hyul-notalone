@@ -1,0 +1,80 @@
+<html layout:decorate="~{layout}">
+  <div layout:fragment="content">
+    <header
+      class="site-header section-padding d-flex justify-content-center align-items-center"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-12 mb-3">
+            <h1>
+              <span class="d-block text-primary">Choose your</span>
+              <span class="d-block text-dark">favorite stuffs</span>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section class="about section-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-2 col-12 mb-auto">
+            <h5 style="margin-bottom: 50px;">
+              <span class="d-block text-dark">My Page</span>
+            </h5>
+            <ul class="nav nav-pills mb-5 mx-auto justify-content-center align-items-center" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="false">구매 목록</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-youtube-tab" data-bs-toggle="pill" data-bs-target="#pills-youtube" type="button" role="tab" aria-controls="pills-youtube" aria-selected="false">test</button>
+                </li>
+            </ul>
+        </div>
+          <!-- 구매목록 -->
+          <div class="col-lg-10 col-12">
+            <h3>
+              <span class="d-block text-dark">구매 목록</span>
+            </h3>
+            <div class="row">
+              <table width="100%">
+                <tr>
+                </tr>
+              </table>
+            </div>
+            <div class="table-responsive" style="padding-top: 50px">
+              <table class="table table-hover">
+                <thead>
+                  <tr style="text-align: center;">
+                    <th scope="col">No.</th>
+                    <th scope="col">상품</th>
+                    <th scope="col">수량</th>
+                    <th scope="col">가격</th>
+                    <th scope="col">구매 날짜</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="text-align: center;" th:each="purchaseItem : ${purchaseItemList}">
+                    <td scope="row" th:text="${purchaseItem.purchaseItemId}"></td>
+                    <td scope="row" th:text="${purchaseItem.productName}" ></td>
+                    <td scope="row" th:text="${purchaseItem.purchaseCount}" ></td>
+                    <td scope="row" th:text="${purchaseItem.productTotalPrice}" ></td>
+                    <td scope="row" th:text="${purchaseItem.purchase.purchaseDate}" ></td>
+                  </tr>
+                </tbody>
+                <!-- <tfoot>
+                  <tr style="text-align: center;">
+                    <th></th>
+                    <th></th>
+                    <th>총액</th>
+                    <th th:text="|${totalCount} 원|"></th>
+                    <th></th>
+                  </tr>
+                </tfoot> -->
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</html>
